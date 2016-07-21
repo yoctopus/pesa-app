@@ -5,6 +5,7 @@ import android.app.Application;
 import android.content.Context;
 
 import com.octopus.pesa.models.Account;
+import com.octopus.pesa.models.Transaction;
 import com.octopus.pesa.services.PesaService;
 
 import java.io.File;
@@ -12,7 +13,7 @@ import java.io.File;
 /**
  * Created by octopus on 7/18/16.
  */
-public class PesaApp extends Application {
+public class PesaApp extends Application implements Transaction.TransactionCompleteListener{
     private Context pesaContext;
     private Activity currentActivity;
     private PesaService pesaService;
@@ -26,9 +27,19 @@ public class PesaApp extends Application {
 
     }
 
+
     @Override
     public void onCreate() {
         super.onCreate();
+        pesaContext = getApplicationContext();
+        //fetAccountData();
+
+    }
+
+    private void fetAccountData() {
+        account = new Account(pesaContext);
+        account.setOnTransactionCompleteListener(this);
+        account.InitAccount();
     }
 
     public Context getPesaContext() {
@@ -61,5 +72,15 @@ public class PesaApp extends Application {
 
     public void setAccount(Account account) {
         this.account = account;
+    }
+
+    @Override
+    public void onTransactionComplete(int id, boolean success) {
+        switch (id) {
+            case Transaction.INIT : {
+                account = TempData.account;
+                break;
+            }
+        }
     }
 }

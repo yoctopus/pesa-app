@@ -6,6 +6,7 @@ import android.util.Log;
 import com.octopus.pesa.models.transactions.AccountInfoTransaction;
 import com.octopus.pesa.models.transactions.ExpenseTransaction;
 import com.octopus.pesa.models.transactions.IncomeTransaction;
+import com.octopus.pesa.models.transactions.InitiateAccountTransaction;
 import com.octopus.pesa.models.transactions.LoginTransaction;
 import com.octopus.pesa.models.transactions.RecordsTransaction;
 
@@ -50,6 +51,11 @@ public class Account {
         setTx(new AccountInfoTransaction(getContext(), getActivityContext()));
         Log.i("Account", "refreshing info");
         getTx().executeNow();
+    }
+
+    public void InitAccount() {
+        tx = new InitiateAccountTransaction(getContext(), null);
+        tx.executeNow();
     }
 
     public void loginAccount(int pin) {

@@ -49,7 +49,7 @@ public class RecordsTransaction extends Transaction {
      **/
     @Override
     public boolean execute() {
-        records = getDb().getRecords();
+        records = organizeRecords(getDb().getRecords());
         items = getDb().getItems();
         if (!records.isEmpty()) {
             for (Record r : records) {
@@ -58,6 +58,13 @@ public class RecordsTransaction extends Transaction {
             return true;
         }
         return false;
+    }
+    private ArrayList<Record> organizeRecords(ArrayList<Record> records) {
+        ArrayList<Record> records1 = new ArrayList<>();
+        for(int i = records.size() - 1; i >= 0 ; i--) {
+            records1.add(records.get(i));
+        }
+        return records1;
     }
 
     /**

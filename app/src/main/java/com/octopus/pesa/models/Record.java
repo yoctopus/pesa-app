@@ -11,35 +11,40 @@ import java.util.Date;
 public class Record {
     public static String Income = Statement.Types.INCOME_TYPE;
     public static String Expense = Statement.Types.EXPENSE_TYPE;
-    public int id;
-    public String Type;
-    public String NameItem;
-    public int Amount;
-    public long datemillis;
-    public Date date;
+    private int id;
+    private String Type;
+    private String NameItem;
+    private int Amount;
+    private long datemillis;
+    private Date date;
 
     public Record(int id, Item item, int amount, long datemillis) {
         this(id, item.getType(), item.getName(), amount, datemillis);
     }
 
     public Record(int id, String type, String name, int amount, long datemillis) {
-        this.id = id;
-        this.Type = type;
-        this.NameItem = name;
-        this.Amount = amount;
-        this.datemillis = datemillis;
+        this.setId(id);
+        this.setType(type);
+        this.setNameItem(name);
+        this.setAmount(amount);
+        this.setDatemillis(datemillis);
+        calculateDate();
     }
 
     public Record(Item item, int amount) {
-        Type = item.getType();
-        NameItem = item.getName();
-        Amount = amount;
+        setType(item.getType());
+        setNameItem(item.getName());
+        setAmount(amount);
+        this.setDatemillis(System.currentTimeMillis());
         calculateDate();
-        this.datemillis = System.currentTimeMillis();
+    }
+
+    public String getDateString() {
+        return Calc.getDateString(new Date(), datemillis);
     }
 
     public void calculateDate() {
-        this.date = Calc.getDate(System.currentTimeMillis());
+        this.setDate(Calc.getDate(getDatemillis()));
     }
 
     public int getId() {
@@ -80,5 +85,17 @@ public class Record {
 
     public void setDatemillis(int datemillis) {
         this.datemillis = datemillis;
+    }
+
+    public void setDatemillis(long datemillis) {
+        this.datemillis = datemillis;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
     }
 }

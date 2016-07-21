@@ -64,6 +64,12 @@ public class IncomeFragment extends Fragment {
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        onButtonPressed();
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
@@ -89,6 +95,7 @@ public class IncomeFragment extends Fragment {
         super.onAttach(context);
         if (context instanceof OnFragmentInteractionListener) {
             mListener = (OnFragmentInteractionListener) context;
+
 
         } else {
             throw new RuntimeException(context.toString()

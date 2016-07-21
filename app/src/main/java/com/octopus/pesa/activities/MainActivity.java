@@ -15,12 +15,16 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.octopus.pesa.R;
 import com.octopus.pesa.TempData;
 import com.octopus.pesa.models.Account;
+import com.octopus.pesa.models.Record;
 import com.octopus.pesa.models.Transaction;
+import com.octopus.pesa.models.adapters.RecordAdapter;
 import com.octopus.pesa.models.notifications.Notification;
 import com.octopus.pesa.models.views.RecordView;
 
@@ -29,7 +33,7 @@ public class MainActivity extends AppCompatActivity
     private Account account;
     private TextView nameView;
     private DrawerLayout drawer;
-    private RecordView recordView;
+    private ListView recordView;
 
     private Notification notification;
 
@@ -56,6 +60,8 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         notification = new Notification(this);
+
+        recordView = (ListView) findViewById(R.id.listView_recent);
 
     }
 
@@ -120,7 +126,7 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     protected void onResume() {
-        printRecords();
+        prepareData();
         super.onResume();
     }
 
@@ -146,6 +152,17 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void printRecords() {
+
+        if (!account.getRecords().isEmpty()) {
+            RecordAdapter adapter = new RecordAdapter(this, R.layout.record_row, account.getRecords());
+            recordView.setAdapter(adapter);
+            recordView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+                }
+            });
+        }
 
     }
 

@@ -18,6 +18,7 @@ public abstract class Transaction {
     public static final int EXPENSE = TempData.ExpenseTransactionID;
     public static final int ITEMS = TempData.ItemTransactionID;
     public static final int INFO = TempData.AccInfoTransactionID;
+    public static final int INIT = TempData.InitTransactionID;
     public TransactionCompleteListener txCompleteListener = null;
     private Notification notification;
     private Context context;

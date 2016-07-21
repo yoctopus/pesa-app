@@ -1,6 +1,7 @@
 package com.octopus.pesa.models.transactions;
 
 import android.content.Context;
+import android.widget.Toast;
 
 import com.octopus.pesa.models.AccountInfo;
 import com.octopus.pesa.models.Record;
@@ -26,6 +27,7 @@ public class ExpenseTransaction extends Transaction {
     @Override
     public void endTransaction(boolean success) {
         logTransaction("Adding expense end");
+        Toast.makeText(getActivityContext(), "Expense transacted", Toast.LENGTH_SHORT).show();
     }
 
     /**

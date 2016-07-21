@@ -65,6 +65,7 @@ public class BalanceFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+        onButtonPressed();
 
     }
 
@@ -80,6 +81,7 @@ public class BalanceFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         onButtonPressed();
+
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -94,6 +96,7 @@ public class BalanceFragment extends Fragment {
         super.onAttach(context);
         if (context instanceof OnFragmentInteractionListener) {
             mListener = (OnFragmentInteractionListener) context;
+
 
         } else {
             throw new RuntimeException(context.toString()
