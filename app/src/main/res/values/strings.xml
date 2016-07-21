@@ -1,0 +1,69 @@
+<resources>
+    <string name="app_name">Pesa</string>
+    <string name="app_label">Pesa</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+
+    <string name="title_activity_settings">Settings</string>
+
+    <!-- Strings related to Settings -->
+
+    <!-- Example General settings -->
+    <string name="pref_header_general">Account</string>
+
+    <string name="pref_title_sync_frequency">Sync frequency</string>
+    <string-array name="pref_sync_frequency_titles">
+        <item>15 minutes</item>
+        <item>30 minutes</item>
+        <item>1 hour</item>
+        <item>3 hours</item>
+        <item>6 hours</item>
+        <item>Never</item>
+    </string-array>
+    <string-array name="pref_sync_frequency_values">
+        <item>15</item>
+        <item>30</item>
+        <item>60</item>
+        <item>180</item>
+        <item>360</item>
+        <item>-1</item>
+    </string-array>
+
+    <string name="pref_title_system_sync_settings">System sync settings</string>
+
+    <!-- Example settings for Notifications -->
+    <string name="pref_header_notifications">Notifications</string>
+
+    <string name="pref_title_new_message_notifications">New message notifications</string>
+
+    <string name="pref_title_ringtone">Ringtone</string>
+    <string name="pref_ringtone_silent">Silent</string>
+
+    <string name="pref_title_vibrate">Vibrate</string>
+    <string name="title_activity_transaction">Transaction</string>
+    <string name="title_activity_developer">Developer</string>
+
+    <string name="managing_your_finance">Helping you manage finances</string>
+    <string name="balance">Balance</string>
+    <string name="title_activity_login">Log in</string>
+    <string name="error_incorrect_password">Incorrect pin</string>
+
+    <string name="pin">PIN</string>
+    <string name="enter_pin">Enter PIN</string>
+    <string name="enter_amount">Enter Amount</string>
+    <string name="spinner_prompt">Pick an Item...</string>
+    <string name="first_item_airtime">Airtime</string>
+    <string name="account">Account</string>
+    <string name="persona">Persona</string>
+    <string name="income">Income</string>
+    <string name="expense">Expense</string>
+    <string name="settings">Settings</string>
+    <string name="developer">Developer</string>
+
+    <string name="title_activity_splash">Welcome </string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">Pesa Manager \n I\'m managing your expenses for you</string>
+</resources>

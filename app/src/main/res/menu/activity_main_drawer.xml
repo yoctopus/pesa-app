@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item android:title="@string/account">
+            <menu>
+                <item
+                    android:id="@+id/nav_income"
+                    android:icon="@drawable/ic_income"
+                    android:title="@string/income" />
+                <item
+                    android:id="@+id/nav_expense"
+                    android:icon="@drawable/ic_expense"
+                    android:title="@string/expense" />
+                <item
+                    android:id="@+id/nav_balance"
+                    android:icon="@drawable/ic_balance"
+                    android:title="Balance" />
+            </menu>
+        </item>
+
+        <item android:title="@string/persona">
+            <menu>
+                <item
+                    android:id="@+id/nav_settings"
+                    android:icon="@drawable/ic_settings"
+                    android:title="@string/settings" />
+                <item
+                    android:id="@+id/nav_developer"
+                    android:icon="@drawable/ic_developer"
+                    android:title="@string/developer" />
+            </menu>
+        </item>
+    </group>
+</menu>
