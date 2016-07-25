@@ -2,6 +2,10 @@ package com.octopus.pesa.models.adapters;
 
 
 import android.content.Context;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.ColorFilter;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -62,10 +66,21 @@ public class RecordAdapter extends ArrayAdapter {
         getAmount().setText(""+r.getAmount());
         getDate().setText(r.getDateString());
         if(r.getType() == Item.EXPENSE_TYPE) {
-            getImageView().setImageResource(R.drawable.ic_expense);
+            String fnm = "ic_expense"; //  this is image file name
+            String PACKAGE_NAME = getContext().getPackageName();
+            int imgId = getContext().getResources().getIdentifier(PACKAGE_NAME+":drawable/"+fnm , null, null);
+            //    Bitmap bitmap = BitmapFactory.decodeResource(getResources(),imgId);
+            imageView.setImageBitmap(BitmapFactory.decodeResource(getContext().getResources(),imgId));
+
+
+
         }
         else if (r.getType() == Item.INCOME_TYPE) {
-            getImageView().setImageResource(R.drawable.ic_income);
+            String fnm = "ic_income"; //  this is image file name
+            String PACKAGE_NAME = getContext().getPackageName();
+            int imgId = getContext().getResources().getIdentifier(PACKAGE_NAME+":drawable/"+fnm , null, null);
+            //    Bitmap bitmap = BitmapFactory.decodeResource(getResources(),imgId);
+            imageView.setImageBitmap(BitmapFactory.decodeResource(getContext().getResources(),imgId));
         }
 
 

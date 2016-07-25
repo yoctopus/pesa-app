@@ -22,29 +22,36 @@ public class Calc {
 
     public static String getDateString(Date now, Date then) {
         String string = null;
-        if(now.getDay() == then.getDay()) {
-            if ((now.getHours() - then.getHours()) == 1) {
-                int md = now.getMinutes() - then.getMinutes();
-                string = md+" minutes ago";
+        if(now.getHours() - then.getHours() <= 1) {
+            if (then.getMinutes() > now.getMinutes()) {
+
             }
-            if(now.getHours() - then.getHours() > 1) {
-                int hd = now.getHours() - then.getHours();
-                string = hd+" hours ago";
-            }
+            int md = now.getMinutes() - then.getMinutes();
+            string = md+" minutes ago";
+
+        }
+        else if(now.getHours() - then.getHours() > 1) {
+            int hd = now.getHours() - then.getHours();
+            string = hd+" hours ago";
         }
 
-        if ((now.getDay() - then.getDay()) == 1) {
+       else if ((now.getDay() - then.getDay()) == 1) {
             string = "Yesterday";
+            if (then.getHours() <= 12) {
+                string+= " morning";
+            }
+            else if (then.getHours() > 12 && then.getHours() <= 16) {
+                string += " afternoon";
+            }
+            else if (then.getHours() > 16) {
+                string+= " evening";
+            }
         }
-        if ((now.getDay() - then.getDay()) == 1 && then.getHours() <= 12) {
-            string = "Yesterday morning";
+        else if (now.getDay() - then.getDay() > 1) {
+            int dd = now.getDay() - then.getDay();
+            string = dd+" days ago";
         }
-        if ((now.getDay() - then.getDay()) == 1 && then.getHours() > 12 && then.getHours() <= 16) {
-            string = "Yesterday afternoon";
-        }
-        if ((now.getDay() - then.getDay()) == 1 && then.getHours() > 16) {
-            string = "Yesterday evening";
-        }
+
         return string;
     }
 

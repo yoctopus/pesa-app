@@ -17,7 +17,7 @@
         android:layout_marginBottom="5dp"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
-        android:layout_weight="3"
+        android:layout_weight="7"
         android:background="#ffffff"
         android:orientation="vertical"
         android:paddingTop="10dp">
@@ -27,14 +27,20 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:textAppearance="?android:attr/textAppearanceLarge" />
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:backgroundTintMode="src_atop"
+            android:breakStrategy="high_quality"
+            android:drawableTintMode="src_over"
+            android:elevation="2dp"
+            android:height="2dp" />
 
         <LinearLayout
             android:id="@+id/show_recent_percentages"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="3"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:background="#e0e0e0">
 
             <TextView
                 android:id="@+id/two_day_before_yesterday_textview"
@@ -74,9 +80,11 @@
         android:layout_height="fill_parent"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
-        android:layout_weight="2"
+        android:layout_weight="3"
         android:backgroundTintMode="src_atop"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:dividerPadding="5dp"
+        android:elevation="5dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -100,7 +108,8 @@
                 android:text="Recent Transactions"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:textColor="#000000"
-                android:textSize="20sp" />
+                android:textSize="25sp"
+                android:layout_marginLeft="10dp" />
         </LinearLayout>
 
         <ListView
@@ -110,11 +119,7 @@
             android:divider="@color/colorAccent"
             android:dividerHeight="1dp"
             android:listSelector="@drawable/list_selector"
-            android:background="#e0e0e0"
-            android:layout_marginBottom="2dp"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
-            android:layout_marginTop="2dp" />
+            android:background="#e0e0e0" />
     </LinearLayout>
 
 </LinearLayout>

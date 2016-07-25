@@ -36,7 +36,7 @@ public class Record {
         setNameItem(item.getName());
         setAmount(amount);
         this.setDatemillis(System.currentTimeMillis());
-        calculateDate();
+
     }
 
     public String getDateString() {
