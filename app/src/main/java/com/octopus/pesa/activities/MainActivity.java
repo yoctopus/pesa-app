@@ -19,25 +19,24 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.octopus.pesa.PesaApp;
 import com.octopus.pesa.R;
-import com.octopus.pesa.TempData;
-import com.octopus.pesa.models.Account;
-import com.octopus.pesa.models.Record;
+import com.octopus.pesa.models.TempData;
 import com.octopus.pesa.models.Transaction;
 import com.octopus.pesa.models.adapters.RecordAdapter;
 import com.octopus.pesa.models.notifications.Notification;
-import com.octopus.pesa.models.views.BalanceChart;
-import com.octopus.pesa.models.views.RecordView;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, Transaction.TransactionCompleteListener {
-    private Account account;
+
     private TextView nameView;
     private DrawerLayout drawer;
     private ListView recordView;
     private TextView balanceText;
 
     private Notification notification;
+
+    private PesaApp app;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +65,8 @@ public class MainActivity extends AppCompatActivity
         recordView = (ListView) findViewById(R.id.listView_recent);
         balanceText = (TextView) findViewById(R.id.show_daily_usage_percentage);
 
+        app = (PesaApp) getApplication();
+
     }
 
     @Override
@@ -75,11 +76,11 @@ public class MainActivity extends AppCompatActivity
         prepareData();
     }
 
+
     private void prepareData() {
-        account = TempData.account;
-        account.setActivityContext(this);
-        account.requestRecords();
-        account.setOnTransactionCompleteListener(this);
+        app.getAccount().setActivityContext(this);
+        app.getAccount().requestRecords();
+        app.getAccount().setOnTransactionCompleteListener(this);
     }
 
     @Override
@@ -89,7 +90,7 @@ public class MainActivity extends AppCompatActivity
         } else {
             drawer.openDrawer(GravityCompat.START);
             nameView = (TextView) findViewById(R.id.userName);
-            String name = account.getInfo().getName();
+            String name = app.getAccount().getInfo().getName();
             nameView.setText(name);
         }
         return super.onMenuOpened(featureId, menu);
@@ -130,6 +131,7 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     protected void onResume() {
+        app = (PesaApp) getApplication();
         prepareData();
         super.onResume();
     }
@@ -138,10 +140,10 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onTransactionComplete(int id, boolean success) {
         switch (id) {
-            case TempData.RecordsTransactionID: {
+            case Transaction.RECORDS: {
                 if (success) {
-                    account.setRecords(TempData.records);
-                    account.setItems(TempData.items);
+                    app.getAccount().setRecords(TempData.records);
+                    app.getAccount().setItems(TempData.items);
                     printBalance();
                     printRecords();
                 } else {
@@ -152,8 +154,8 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void printBalance() {
-        int totalspent = account.getExpenseTotal();
-        int accset = account.getInfo().getDailyLimit();
+        int totalspent = app.getAccount().getExpenseTotal();
+        int accset = app.getAccount().getInfo().getDailyLimit();
         if (accset != 0) {
             int percent = totalspent / accset * 100;
             balanceText.setText(percent+" %");
@@ -165,8 +167,8 @@ public class MainActivity extends AppCompatActivity
 
     private void printRecords() {
 
-        if (!account.getRecords().isEmpty()) {
-            RecordAdapter adapter = new RecordAdapter(this, R.layout.record_row, account.getRecords());
+        if (!app.getAccount().getRecords().isEmpty()) {
+            RecordAdapter adapter = new RecordAdapter(this, R.layout.record_row, app.getAccount().getRecords());
             recordView.setAdapter(adapter);
             recordView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
@@ -179,8 +181,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void informUserofNoRecords() {
-        notification.getAlert().setTitle("No records");
-        notification.getAlert().setMessage("Would you like to add a new record");
+        notification.setDialogBundle("No Records", "Would you like to add a new record");
         notification.getAlert().setPositiveButton("Add record", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
@@ -204,20 +205,17 @@ public class MainActivity extends AppCompatActivity
 
     private void startTransactionActivity() {
         Intent intent = new Intent(MainActivity.this, TransactionActivity.class);
-        TempData.account = account;
         this.startActivity(intent);
     }
 
     private void startTransactionActivity(int id) {
         Intent intent = new Intent(MainActivity.this, TransactionActivity.class);
         intent.putExtra(TempData.FRAGMENTID, id);
-        TempData.account = account;
         this.startActivity(intent);
     }
 
     private void startSettingsActivity() {
         Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
-        TempData.account = account;
         this.startActivity(intent);
     }
 

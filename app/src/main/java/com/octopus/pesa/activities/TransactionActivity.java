@@ -18,8 +18,9 @@ import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.octopus.pesa.PesaApp;
 import com.octopus.pesa.R;
-import com.octopus.pesa.TempData;
+import com.octopus.pesa.models.TempData;
 import com.octopus.pesa.fragments.BalanceFragment;
 import com.octopus.pesa.fragments.ExpenseFragment;
 import com.octopus.pesa.fragments.IncomeFragment;
@@ -37,7 +38,7 @@ public class TransactionActivity extends AppCompatActivity implements
         BalanceFragment.OnFragmentInteractionListener,
         View.OnClickListener, Transaction.TransactionCompleteListener {
 
-    private Account account;
+    private PesaApp app;
     private int userChoice;
     private SectionsPagerAdapter mSectionsPagerAdapter;
     private ViewPager mViewPager;
@@ -77,8 +78,8 @@ public class TransactionActivity extends AppCompatActivity implements
         getmViewPager().setCurrentItem(getUserChoice());
         setTabLayout((TabLayout) findViewById(R.id.tabs));
         getTabLayout().setupWithViewPager(getmViewPager());
-        setAccount(TempData.account);
-        notification = new Notification(this);
+        setApp((PesaApp) getApplication());
+        setNotification(new Notification(this));
     }
 
     @Override
@@ -128,6 +129,7 @@ public class TransactionActivity extends AppCompatActivity implements
         setExpenseSpinner((Spinner) findViewById(R.id.expense_tem_name_spinner));
         setExpenseTextView((TextView) findViewById(R.id.expense_amount_textView));
         expenseButtons = new ArrayList<>();
+
         getExpenseButtons().add((Button) findViewById(R.id.expensebtn0));
         getExpenseButtons().add((Button) findViewById(R.id.expensebtn1));
         getExpenseButtons().add((Button) findViewById(R.id.expensebtn2));
@@ -299,20 +301,20 @@ public class TransactionActivity extends AppCompatActivity implements
     }
 
     private void notifyError(Exception e) {
-        notification.getAlert().setTitle(e.getMessage());
-        notification.getAlert().setPositiveButton("Correct", new DialogInterface.OnClickListener() {
+        getNotification().setDialogBundle(e.getMessage(), null);
+        getNotification().getAlert().setPositiveButton("Correct", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 correctTransaction();
             }
         });
-        notification.getAlert().setNegativeButton("Ignore", new DialogInterface.OnClickListener() {
+        getNotification().getAlert().setNegativeButton("Ignore", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 ignoreTransaction();
             }
         });
-        notification.notify(Notification.DIALOG);
+        getNotification().notify(Notification.DIALOG);
     }
 
     private void correctTransaction() {
@@ -328,15 +330,15 @@ public class TransactionActivity extends AppCompatActivity implements
         switch (id) {
             case Transaction.INCOME:
             case Transaction.EXPENSE: {
-                getAccount().refresh();
+                getApp().getAccount().refresh();
                 break;
             }
             case Transaction.RECORDS: {
-                getAccount().setRecords(TempData.records);
+                getApp().getAccount().setRecords(TempData.records);
                 break;
             }
             case Transaction.INFO: {
-                getAccount().setInfo(TempData.info);
+                getApp().getAccount().setInfo(TempData.info);
                 break;
             }
 
@@ -344,11 +346,13 @@ public class TransactionActivity extends AppCompatActivity implements
     }
 
     public Account getAccount() {
-        return account;
+        return getApp().getAccount();
     }
 
-    public void setAccount(Account account) {
-        this.account = account;
+    public void setAccount(Account account)
+    {
+        getApp().setAccount(account);
+
     }
 
     public int getUserChoice() {
@@ -446,7 +450,7 @@ public class TransactionActivity extends AppCompatActivity implements
         return expenseButtons;
     }
 
-    public void setExpenseButtons(ArrayList<Button> expenseButtons) {
+    public void setExpenseButtons(final ArrayList<Button> expenseButtons) {
         this.expenseButtons = expenseButtons;
     }
 
@@ -454,7 +458,7 @@ public class TransactionActivity extends AppCompatActivity implements
         return incomeButtons;
     }
 
-    public void setIncomeButtons(ArrayList<Button> incomeButtons) {
+    public void setIncomeButtons(final ArrayList<Button> incomeButtons) {
         this.incomeButtons = incomeButtons;
     }
 
@@ -496,6 +500,22 @@ public class TransactionActivity extends AppCompatActivity implements
 
     public void setBalView(TextView balView) {
         this.balView = balView;
+    }
+
+    public PesaApp getApp() {
+        return app;
+    }
+
+    public void setApp(PesaApp app) {
+        this.app = app;
+    }
+
+    public Notification getNotification() {
+        return notification;
+    }
+
+    public void setNotification(Notification notification) {
+        this.notification = notification;
     }
 
     /**

@@ -8,10 +8,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.octopus.pesa.PesaApp;
 import com.octopus.pesa.R;
-import com.octopus.pesa.TempData;
+import com.octopus.pesa.models.TempData;
 import com.octopus.pesa.models.Account;
-import com.octopus.pesa.models.Transaction;
+import com.octopus.pesa.models.notifications.Notification;
 
 import java.util.ArrayList;
 
@@ -23,9 +24,10 @@ import java.util.ArrayList;
  * the transaction should call on transaction complete method.
  * start the main activity and finish this activity
  */
-public class LoginActivity extends AppCompatActivity implements View.OnClickListener, Transaction.TransactionCompleteListener {
+public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
     //user account
-    private Account account;
+    private PesaApp app;
+    private Notification notification;
     //textview holding the pin
     private TextView pinText;
     //buttons for entering the pin
@@ -42,7 +44,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         setContentView(R.layout.activity_login);
         // Set up the login form.
         setPinText((TextView) findViewById(R.id.textviewPin));
+        app = (PesaApp) getApplication();
 
+        notification = new Notification(this);
     }
 
     @Override
@@ -50,8 +54,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         super.onPostCreate(savedInstanceState);
 
         configureButtons();
-        setAccount(new Account(getApplicationContext()));
-        getAccount().setActivityContext(this);
 
     }
 
@@ -66,7 +68,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         getButtons().add((Button) findViewById(R.id.btn7));
         getButtons().add((Button) findViewById(R.id.btn8));
         getButtons().add((Button) findViewById(R.id.btn9));
-        getButtons().add((Button) findViewById(R.id.btnDel));
         for (int i = 0; i < getButtons().size(); i++) {
             getButtons().get(i).setOnClickListener(this);
         }
@@ -137,11 +138,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 }
                 break;
             }
-            case R.id.btnDel: {
-                getPinText().setText(null);
-                getPinText().setError(null);
-                break;
-            }
 
         }
 
@@ -150,25 +146,16 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     //initiate the login attempt
     public void execute(String pin) {
         int intpin = Integer.parseInt(pin);
-        getAccount().loginAccount(intpin);
-        getAccount().setOnTransactionCompleteListener(this);
-    }
-
-    @Override
-    public void onTransactionComplete(int id, boolean success) {
-        switch (id) {
-            case Transaction.LOGIN: {
-                if (success) {
-                    getAccount().setInfo(TempData.info);
-                    login();
-                } else {
-                    getPinText().setError(getString(R.string.error_incorrect_password));
-                    getPinText().requestFocus();
-                }
-
-                break;
-            }
-
+        if (intpin == getAccount().getInfo().getPin()) {
+            notification.setToastBundle("Success", "Login success");
+            notification.notify(Notification.TOAST);
+            login();
+        }
+        else {
+            getPinText().setText(null);
+            getPinText().setError(null);
+            notification.setToastBundle("Failed", "Login failed");
+            notification.notify(Notification.TOAST);
         }
     }
 
@@ -185,11 +172,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
 
     public Account getAccount() {
-        return account;
+        return app.getAccount();
     }
 
     public void setAccount(Account account) {
-        this.account = account;
+        app.setAccount(account);
     }
 
     public TextView getPinText() {

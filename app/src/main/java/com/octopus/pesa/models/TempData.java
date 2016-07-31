@@ -1,4 +1,4 @@
-package com.octopus.pesa;
+package com.octopus.pesa.models;
 
 import com.octopus.pesa.models.Account;
 import com.octopus.pesa.models.AccountInfo;

@@ -9,7 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.octopus.pesa.R;
-import com.octopus.pesa.TempData;
+import com.octopus.pesa.models.TempData;
 
 /**
  * A simple {@link Fragment} subclass.

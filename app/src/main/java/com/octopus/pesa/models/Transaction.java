@@ -4,7 +4,6 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 
-import com.octopus.pesa.TempData;
 import com.octopus.pesa.models.db.AccountDatabase;
 import com.octopus.pesa.models.notifications.Notification;
 
@@ -20,7 +19,6 @@ public abstract class Transaction {
     public static final int INFO = TempData.AccInfoTransactionID;
     public static final int INIT = TempData.InitTransactionID;
     public TransactionCompleteListener txCompleteListener = null;
-    private Notification notification;
     private Context context;
     private Context activityContext;
     private int ID;
@@ -30,7 +28,6 @@ public abstract class Transaction {
         setDb(new AccountDatabase(context));
         this.setContext(context);
         this.setActivityContext(activityContext);
-        notification = new Notification(activityContext);
         this.ID = id;
     }
 

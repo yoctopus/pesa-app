@@ -3,7 +3,7 @@ package com.octopus.pesa.models.transactions;
 import android.content.Context;
 import android.widget.Toast;
 
-import com.octopus.pesa.TempData;
+import com.octopus.pesa.models.TempData;
 import com.octopus.pesa.models.AccountInfo;
 import com.octopus.pesa.models.Transaction;
 
@@ -11,6 +11,7 @@ import com.octopus.pesa.models.Transaction;
  * Created by octopus on 6/23/16.
  */
 public class AccountInfoTransaction extends Transaction {
+
     private AccountInfo info;
 
     public AccountInfoTransaction(Context context, Context activity) {

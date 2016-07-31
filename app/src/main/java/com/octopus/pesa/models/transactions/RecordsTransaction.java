@@ -2,7 +2,7 @@ package com.octopus.pesa.models.transactions;
 
 import android.content.Context;
 
-import com.octopus.pesa.TempData;
+import com.octopus.pesa.models.TempData;
 import com.octopus.pesa.models.Item;
 import com.octopus.pesa.models.Record;
 import com.octopus.pesa.models.Transaction;

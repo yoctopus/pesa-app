@@ -2,6 +2,7 @@ package com.octopus.pesa.models.notifications;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.widget.Toast;
 
 /**
  * Created by octopus on 7/16/16.
@@ -18,9 +19,11 @@ public class Notification {
     private PesaAlert alert;
     private AlertDialog dialog;
 
+    private String title;
+    private String message;
+
     public Notification(Context context) {
         this.setContext(context);
-        setAlert(new PesaAlert(context));
     }
 
     public void notify(final int type) {
@@ -49,11 +52,24 @@ public class Notification {
                 vibrate();
                 break;
             }
+
         }
+    }
+
+    public void setToastBundle(String title, String message) {
+        this.title = title;
+        this.message = message;
+    }
+    public void setDialogBundle(String title, String message) {
+        alert = new PesaAlert(context);
+        this.title = title;
+        this.message = message;
     }
 
 
     public void displayDialog() {
+        alert.setTitle(title);
+        alert.setMessage(message);
         alert.showAlert();
     }
 
@@ -62,7 +78,7 @@ public class Notification {
     }
 
     public void showToast() {
-
+        Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
     }
 
     public void soundTone() {

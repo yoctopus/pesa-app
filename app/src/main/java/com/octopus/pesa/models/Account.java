@@ -6,8 +6,7 @@ import android.util.Log;
 import com.octopus.pesa.models.transactions.AccountInfoTransaction;
 import com.octopus.pesa.models.transactions.ExpenseTransaction;
 import com.octopus.pesa.models.transactions.IncomeTransaction;
-import com.octopus.pesa.models.transactions.InitiateAccountTransaction;
-import com.octopus.pesa.models.transactions.LoginTransaction;
+import com.octopus.pesa.models.transactions.InitAppTransaction;
 import com.octopus.pesa.models.transactions.RecordsTransaction;
 
 import java.util.ArrayList;
@@ -16,6 +15,7 @@ import java.util.ArrayList;
  * Created by octopus on 6/18/16.
  */
 public class Account {
+    private final String TAG = "Account";
     //the general account information for storing balance, pin and account name
     private AccountInfo info;
     //the general account records for holding records currently present in this account
@@ -43,25 +43,20 @@ public class Account {
 
     public void requestRecords() {
         setTx(new RecordsTransaction(getContext(), getActivityContext()));
-        Log.i("Pesa", "Fetching records");
+        Log.i(TAG, "Fetching records");
         getTx().executeNow();
     }
 
     public void refreshAccountInfo() {
         setTx(new AccountInfoTransaction(getContext(), getActivityContext()));
-        Log.i("Account", "refreshing info");
+        Log.i(TAG, "refreshing info");
         getTx().executeNow();
     }
 
     public void InitAccount() {
-        tx = new InitiateAccountTransaction(getContext(), null);
+        tx = new InitAppTransaction(getContext(), null);
+        Log.i(TAG, "Account init");
         tx.executeNow();
-    }
-
-    public void loginAccount(int pin) {
-        setTx(new LoginTransaction(getContext(), getActivityContext(), pin));
-        Log.i("Account", "Initiating login");
-        getTx().executeNow();
     }
 
     public int getIncomeTotal() {

@@ -3,9 +3,12 @@ package com.octopus.pesa;
 import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
+import android.util.Log;
 
 import com.octopus.pesa.models.Account;
+import com.octopus.pesa.models.TempData;
 import com.octopus.pesa.models.Transaction;
+import com.octopus.pesa.models.transactions.InitAppTransaction;
 import com.octopus.pesa.services.PesaService;
 
 import java.io.File;
@@ -18,6 +21,7 @@ public class PesaApp extends Application implements Transaction.TransactionCompl
     private Activity currentActivity;
     private PesaService pesaService;
     private Account account;
+    private Transaction tx;
 
     private static boolean deleteDir(File file) {
         return false;
@@ -32,14 +36,16 @@ public class PesaApp extends Application implements Transaction.TransactionCompl
     public void onCreate() {
         super.onCreate();
         pesaContext = getApplicationContext();
-        //fetAccountData();
+        tx = null;
+        fetAccountData();
 
     }
 
     private void fetAccountData() {
-        account = new Account(pesaContext);
-        account.setOnTransactionCompleteListener(this);
-        account.InitAccount();
+        tx = new InitAppTransaction(pesaContext, null);
+        Log.i("App", "Account init");
+        tx.setOnTransactionCompleteListener(this);
+        tx.executeNow();
     }
 
     public Context getPesaContext() {
