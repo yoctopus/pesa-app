@@ -16,11 +16,6 @@ public class Record {
     private String NameItem;
     private int Amount;
     private long datemillis;
-    private Date date;
-
-    public Record(int id, Item item, int amount, long datemillis) {
-        this(id, item.getType(), item.getName(), amount, datemillis);
-    }
 
     public Record(int id, String type, String name, int amount, long datemillis) {
         this.setId(id);
@@ -28,24 +23,19 @@ public class Record {
         this.setNameItem(name);
         this.setAmount(amount);
         this.setDatemillis(datemillis);
-        calculateDate();
+
     }
 
     public Record(Item item, int amount) {
         setType(item.getType());
         setNameItem(item.getName());
         setAmount(amount);
-        this.setDatemillis(System.currentTimeMillis());
-
     }
 
     public String getDateString() {
-        return Calc.getDateString(new Date(), datemillis);
+        return Calc.getDateString(datemillis);
     }
 
-    public void calculateDate() {
-        this.setDate(Calc.getDate(getDatemillis()));
-    }
 
     public int getId() {
         return id;
@@ -83,19 +73,11 @@ public class Record {
         return datemillis;
     }
 
-    public void setDatemillis(int datemillis) {
-        this.datemillis = datemillis;
-    }
-
     public void setDatemillis(long datemillis) {
         this.datemillis = datemillis;
     }
 
-    public Date getDate() {
-        return date;
-    }
 
-    public void setDate(Date date) {
-        this.date = date;
-    }
+
+
 }

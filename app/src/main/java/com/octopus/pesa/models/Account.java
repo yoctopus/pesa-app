@@ -93,7 +93,6 @@ public class Account {
         ArrayList<String> items = new ArrayList<>();
         items.add("Airtime");
         items.add("Food");
-        items.add("Swt@");
         items.addAll(getItems_of_Type(Item.EXPENSE_TYPE));
         return items;
     }

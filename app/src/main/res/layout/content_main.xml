@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#eeeeee"
+    android:background="@color/colorPrimaryDark"
     android:orientation="vertical"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".activities.MainActivity"
@@ -18,7 +18,6 @@
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
         android:layout_weight="7"
-        android:background="#ffffff"
         android:orientation="vertical"
         android:paddingTop="10dp">
 
@@ -32,15 +31,20 @@
             android:breakStrategy="high_quality"
             android:drawableTintMode="src_over"
             android:elevation="2dp"
-            android:height="2dp" />
+            android:height="2dp"
+            android:textSize="100sp"
+            android:textColor="#ffffff"
+            android:typeface="monospace"
+            android:gravity="center_vertical|center_horizontal"
+            android:layout_gravity="center"
+            android:textAlignment="gravity" />
 
         <LinearLayout
             android:id="@+id/show_recent_percentages"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="3"
-            android:orientation="horizontal"
-            android:background="#e0e0e0">
+            android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/two_day_before_yesterday_textview"
@@ -107,7 +111,7 @@
                 android:paddingLeft="10dp"
                 android:text="Recent Transactions"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:textColor="#000000"
+                android:textColor="#ffffff"
                 android:textSize="25sp"
                 android:layout_marginLeft="10dp" />
         </LinearLayout>
@@ -118,8 +122,7 @@
             android:layout_height="wrap_content"
             android:divider="@color/colorAccent"
             android:dividerHeight="1dp"
-            android:listSelector="@drawable/list_selector"
-            android:background="#e0e0e0" />
+            android:listSelector="@drawable/list_selector" />
     </LinearLayout>
 
 </LinearLayout>

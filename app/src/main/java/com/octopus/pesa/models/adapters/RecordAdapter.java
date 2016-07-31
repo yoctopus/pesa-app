@@ -28,8 +28,8 @@ public class RecordAdapter extends ArrayAdapter {
     private ImageView imageView;
     private TextView item;
     private TextView amount;
-    private TextView date
-;
+    private TextView date;
+    private TextView type;
 
     public RecordAdapter(Context context, int resource, ArrayList<Record> objects) {
         super(context, resource, objects);
@@ -60,27 +60,17 @@ public class RecordAdapter extends ArrayAdapter {
         setItem((TextView) v.findViewById(R.id.item));
         setAmount((TextView) v.findViewById(R.id.amount));
         setDate((TextView) v.findViewById(R.id.date));
+        type = (TextView) v.findViewById(R.id.typeText);
         setImageView((ImageView) v.findViewById(R.id.list_image));
 
         getItem().setText(r.getNameItem());
         getAmount().setText(""+r.getAmount());
         getDate().setText(r.getDateString());
         if(r.getType() == Item.EXPENSE_TYPE) {
-            String fnm = "ic_expense"; //  this is image file name
-            String PACKAGE_NAME = getContext().getPackageName();
-            int imgId = getContext().getResources().getIdentifier(PACKAGE_NAME+":drawable/"+fnm , null, null);
-            //    Bitmap bitmap = BitmapFactory.decodeResource(getResources(),imgId);
-            imageView.setImageBitmap(BitmapFactory.decodeResource(getContext().getResources(),imgId));
-
-
-
+            type.setText("Expense");
         }
         else if (r.getType() == Item.INCOME_TYPE) {
-            String fnm = "ic_income"; //  this is image file name
-            String PACKAGE_NAME = getContext().getPackageName();
-            int imgId = getContext().getResources().getIdentifier(PACKAGE_NAME+":drawable/"+fnm , null, null);
-            //    Bitmap bitmap = BitmapFactory.decodeResource(getResources(),imgId);
-            imageView.setImageBitmap(BitmapFactory.decodeResource(getContext().getResources(),imgId));
+           type.setText("Income");
         }
 
 

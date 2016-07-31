@@ -29,8 +29,8 @@
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/thumbnail"
         android:layout_toRightOf="@+id/thumbnail"
-        android:textColor="#040404"
-        android:textSize="20sp"
+        android:textColor="#ffffff"
+        android:textSize="25sp"
         android:textStyle="bold"
         android:typeface="sans" />
 
@@ -42,8 +42,8 @@
         android:layout_below="@id/item"
         android:layout_marginTop="3dip"
         android:layout_toRightOf="@+id/thumbnail"
-        android:textColor="#343434"
-        android:textSize="15sp" />
+        android:textColor="#ffffff"
+        android:textSize="20sp" />
 
     <!-- Rightend Duration -->
     <TextView
@@ -54,9 +54,19 @@
         android:layout_alignTop="@id/item"
         android:layout_marginRight="5dip"
         android:gravity="right"
-        android:textColor="#000000"
-        android:textSize="10sp"
+        android:textColor="#ffffff"
+        android:textSize="15sp"
         android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:id="@+id/typeText"
+        android:layout_alignBottom="@+id/amount"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:textColor="#ffffff" />
 
 
 </RelativeLayout>

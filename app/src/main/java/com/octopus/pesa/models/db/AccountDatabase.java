@@ -120,8 +120,7 @@ public class AccountDatabase extends SQLiteOpenHelper {
             String type = c.getString(Statement.ColumnIndex.records_type_column_index);
             String name = c.getString(Statement.ColumnIndex.records_name_column_index);
             int amount = c.getInt(Statement.ColumnIndex.records_amount_column_index);
-            int date = c.getInt(Statement.ColumnIndex.records_date_column_index);
-
+            long date = c.getLong(Statement.ColumnIndex.records_date_column_index);
             Record r = new Record(id, type, name, amount, date);
             records.add(r);
         }
@@ -136,7 +135,7 @@ public class AccountDatabase extends SQLiteOpenHelper {
         values.put(Statement.ColumnNames.RECORDS_NAME_COLUMN_NAME, r.getNameItem());
         values.put(Statement.ColumnNames.RECORDS_AMOUNT_COLUMN_NAME, r.getAmount());
 
-        values.put(Statement.ColumnNames.RECORDS_DATE_COLUMN_NAME, r.getDatemillis());
+        values.put(Statement.ColumnNames.RECORDS_DATE_COLUMN_NAME, System.currentTimeMillis());
         db.insert(Statement.DBInfo.RECORDS_TABLE_NAME, null, values);
         db.close();
         return true;

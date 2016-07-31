@@ -26,6 +26,7 @@ import com.octopus.pesa.models.Record;
 import com.octopus.pesa.models.Transaction;
 import com.octopus.pesa.models.adapters.RecordAdapter;
 import com.octopus.pesa.models.notifications.Notification;
+import com.octopus.pesa.models.views.BalanceChart;
 import com.octopus.pesa.models.views.RecordView;
 
 public class MainActivity extends AppCompatActivity
@@ -34,6 +35,7 @@ public class MainActivity extends AppCompatActivity
     private TextView nameView;
     private DrawerLayout drawer;
     private ListView recordView;
+    private TextView balanceText;
 
     private Notification notification;
 
@@ -62,12 +64,14 @@ public class MainActivity extends AppCompatActivity
         notification = new Notification(this);
 
         recordView = (ListView) findViewById(R.id.listView_recent);
+        balanceText = (TextView) findViewById(R.id.show_daily_usage_percentage);
 
     }
 
     @Override
     protected void onPostCreate(@Nullable Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
+
         prepareData();
     }
 
@@ -148,7 +152,15 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void printBalance() {
-
+        int totalspent = account.getExpenseTotal();
+        int accset = account.getInfo().getDailyLimit();
+        if (accset != 0) {
+            int percent = totalspent / accset * 100;
+            balanceText.setText(percent+" %");
+        }
+        else {
+            balanceText.setText(totalspent+" %");
+        }
     }
 
     private void printRecords() {
