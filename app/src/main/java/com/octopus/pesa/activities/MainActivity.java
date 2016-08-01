@@ -26,6 +26,9 @@ import com.octopus.pesa.models.Transaction;
 import com.octopus.pesa.models.adapters.RecordAdapter;
 import com.octopus.pesa.models.notifications.Notification;
 
+/**
+ * The type Main activity.
+ */
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, Transaction.TransactionCompleteListener {
 
@@ -142,8 +145,8 @@ public class MainActivity extends AppCompatActivity
         switch (id) {
             case Transaction.RECORDS: {
                 if (success) {
-                    app.getAccount().setRecords(TempData.records);
-                    app.getAccount().setItems(TempData.items);
+                    app.getAccount().setRecords(TempData.account.getRecords());
+                    app.getAccount().setItems(TempData.account.getItems());
                     printBalance();
                     printRecords();
                 } else {

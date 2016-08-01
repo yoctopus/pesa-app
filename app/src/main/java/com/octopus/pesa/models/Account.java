@@ -10,6 +10,7 @@ import com.octopus.pesa.models.transactions.InitAppTransaction;
 import com.octopus.pesa.models.transactions.RecordsTransaction;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 /**
  * Created by octopus on 6/18/16.
@@ -35,6 +36,12 @@ public class Account {
         this.items = new ArrayList<>();
         this.setInfo(null);
         setTx(null);
+        items.add(new Item(Item.INCOME_TYPE, "Salary"));
+        items.add(new Item(Item.INCOME_TYPE, "Loan"));
+        items.add(new Item(Item.INCOME_TYPE, "MPesa"));
+        items.add(new Item(Item.EXPENSE_TYPE, "Airtime"));
+        items.add(new Item(Item.EXPENSE_TYPE, "Food"));
+        items.add(new Item(Item.EXPENSE_TYPE, "Shopping"));
     }
 
     public void refresh() {
@@ -42,21 +49,9 @@ public class Account {
     }
 
     public void requestRecords() {
-        setTx(new RecordsTransaction(getContext(), getActivityContext()));
+        setTx(new RecordsTransaction(getContext(), getActivityContext(), this));
         Log.i(TAG, "Fetching records");
         getTx().executeNow();
-    }
-
-    public void refreshAccountInfo() {
-        setTx(new AccountInfoTransaction(getContext(), getActivityContext()));
-        Log.i(TAG, "refreshing info");
-        getTx().executeNow();
-    }
-
-    public void InitAccount() {
-        tx = new InitAppTransaction(getContext(), null);
-        Log.i(TAG, "Account init");
-        tx.executeNow();
     }
 
     public int getIncomeTotal() {
@@ -76,30 +71,25 @@ public class Account {
     }
 
     public ArrayList<String> getIncomeItems() {
-        ArrayList<String> items = new ArrayList<>();
-        items.add("Salary");
-        items.add("Loan");
-        items.add("Mpesa");
-        items.addAll(getItems_of_Type(Item.INCOME_TYPE));
-        return items;
+        return getItems_of_Type(Item.INCOME_TYPE);
     }
 
     public ArrayList<String> getExpenseItems() {
-        ArrayList<String> items = new ArrayList<>();
-        items.add("Airtime");
-        items.add("Food");
-        items.addAll(getItems_of_Type(Item.EXPENSE_TYPE));
-        return items;
+        return getItems_of_Type(Item.EXPENSE_TYPE);
     }
 
     public ArrayList<String> getItems_of_Type(String type) {
         ArrayList<String> strings = new ArrayList<>();
         for (Item item : getItems()) {
-            if (item.getType() == type) {
+            if (assertEquals(item.getType(), type)) {
                 strings.add(item.getName());
             }
         }
         return strings;
+    }
+
+    private boolean assertEquals(String a, String b) {
+        return a.equalsIgnoreCase(b);
     }
 
     public ArrayList<Record> getIncomeRecords() {
@@ -113,7 +103,7 @@ public class Account {
     private ArrayList<Record> getRecords_of_Type(String type) {
         ArrayList<Record> record = new ArrayList<>();
         for (Record r : getRecords()) {
-            if (r.getType() == type) {
+            if (assertEquals(r.getType(), type)) {
                 record.add(r);
             }
         }

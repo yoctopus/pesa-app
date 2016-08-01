@@ -6,6 +6,9 @@ import android.support.v7.widget.Toolbar;
 
 import com.octopus.pesa.R;
 
+/**
+ * The type Developer activity.
+ */
 public class DeveloperActivity extends AppCompatActivity {
 
     @Override

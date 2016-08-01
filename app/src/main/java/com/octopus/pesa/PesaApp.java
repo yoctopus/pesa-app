@@ -42,7 +42,7 @@ public class PesaApp extends Application implements Transaction.TransactionCompl
     }
 
     private void fetAccountData() {
-        tx = new InitAppTransaction(pesaContext, null);
+        tx = new InitAppTransaction(getPesaContext(), null);
         Log.i("App", "Account init");
         tx.setOnTransactionCompleteListener(this);
         tx.executeNow();
@@ -84,7 +84,10 @@ public class PesaApp extends Application implements Transaction.TransactionCompl
     public void onTransactionComplete(int id, boolean success) {
         switch (id) {
             case Transaction.INIT : {
-                account = TempData.account;
+                if (success)
+                    account = TempData.account;
+                else
+                    account = null;
                 break;
             }
         }

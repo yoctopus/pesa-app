@@ -2,6 +2,7 @@ package com.octopus.pesa.models.transactions;
 
 import android.content.Context;
 
+import com.octopus.pesa.models.Account;
 import com.octopus.pesa.models.TempData;
 import com.octopus.pesa.models.Item;
 import com.octopus.pesa.models.Record;
@@ -13,13 +14,11 @@ import java.util.ArrayList;
  * Created by octopus on 6/23/16.
  */
 public class RecordsTransaction extends Transaction {
-    private ArrayList<Record> records;
-    private ArrayList<Item> items;
+    private Account account;
 
-    public RecordsTransaction(Context context, Context activity) {
+    public RecordsTransaction(Context context, Context activity, Account account) {
         super(context, activity, Transaction.RECORDS);
-        records = new ArrayList<>();
-        items = new ArrayList<>();
+        this.account = account;
     }
 
     /**
@@ -31,8 +30,7 @@ public class RecordsTransaction extends Transaction {
     @Override
     public void endTransaction(boolean success) {
         logTransaction("Fetch of records complete");
-        TempData.records = records;
-        TempData.items = items;
+        TempData.account = account;
     }
 
     /**
@@ -49,10 +47,10 @@ public class RecordsTransaction extends Transaction {
      **/
     @Override
     public boolean execute() {
-        records = organizeRecords(getDb().getRecords());
-        items = getDb().getItems();
-        if (!records.isEmpty()) {
-            for (Record r : records) {
+        account.setRecords(organizeRecords(getDb().getRecords()));
+        account.setItems(getDb().getItems());
+        if (!account.getRecords().isEmpty()) {
+            for (Record r : account.getRecords()) {
                 logTransaction("Record " + r.getNameItem() + " amount " + r.getAmount());
             }
             return true;

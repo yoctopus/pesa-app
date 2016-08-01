@@ -66,4 +66,5 @@ public class InitAppTransaction extends Transaction {
         logTransaction("saving account");
         TempData.account = account;
     }
+
 }

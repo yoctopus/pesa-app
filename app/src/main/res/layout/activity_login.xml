@@ -56,7 +56,8 @@
                 android:padding="2dp"
                 android:text="1"
                 android:textColor="#ffffff"
-                android:textSize="40sp" />
+                android:textSize="40sp"
+                android:theme="@style/Button" />
 
             <Button
                 android:id="@+id/btn2"
@@ -69,7 +70,8 @@
                 android:padding="2dp"
                 android:text="2"
                 android:textColor="#ffffff"
-                android:textSize="40sp" />
+                android:textSize="40sp"
+                android:theme="@style/Button" />
 
             <Button
                 android:id="@+id/btn3"
@@ -82,7 +84,8 @@
                 android:padding="2dp"
                 android:text="3"
                 android:textColor="#ffffff"
-                android:textSize="40sp" />
+                android:textSize="40sp"
+                android:theme="@style/Button" />
         </LinearLayout>
 
         <LinearLayout
@@ -102,7 +105,8 @@
                 android:padding="2dp"
                 android:text="4"
                 android:textColor="#ffffff"
-                android:textSize="40sp" />
+                android:textSize="40sp"
+                android:theme="@style/Button" />
 
             <Button
                 android:id="@+id/btn5"
@@ -115,7 +119,8 @@
                 android:padding="2dp"
                 android:text="5"
                 android:textColor="#ffffff"
-                android:textSize="40sp" />
+                android:textSize="40sp"
+                android:theme="@style/Button" />
 
             <Button
                 android:id="@+id/btn6"
@@ -128,7 +133,8 @@
                 android:padding="2dp"
                 android:text="6"
                 android:textColor="#ffffff"
-                android:textSize="40sp" />
+                android:textSize="40sp"
+                android:theme="@style/Button" />
         </LinearLayout>
 
         <LinearLayout
@@ -148,7 +154,8 @@
                 android:padding="2dp"
                 android:text="7"
                 android:textColor="#ffffff"
-                android:textSize="40sp" />
+                android:textSize="40sp"
+                android:theme="@style/Button" />
 
             <Button
                 android:id="@+id/btn8"
@@ -161,7 +168,8 @@
                 android:padding="2dp"
                 android:text="8"
                 android:textColor="#ffffff"
-                android:textSize="40sp" />
+                android:textSize="40sp"
+                android:theme="@style/Button" />
 
             <Button
                 android:id="@+id/btn9"
@@ -174,7 +182,8 @@
                 android:padding="2dp"
                 android:text="9"
                 android:textColor="#ffffff"
-                android:textSize="40sp" />
+                android:textSize="40sp"
+                android:theme="@style/Button" />
         </LinearLayout>
 
         <LinearLayout
@@ -184,9 +193,15 @@
             android:orientation="horizontal">
 
             <Button
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="#00000000" />
+
+            <Button
                 android:id="@+id/btn0"
                 style="?android:attr/buttonStyleSmall"
-                android:layout_width="fill_parent"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="2dp"
                 android:background="#00000000"
@@ -194,7 +209,16 @@
                 android:padding="2dp"
                 android:text="0"
                 android:textColor="#ffffff"
-                android:textSize="40sp" />
+                android:textSize="40sp"
+                android:layout_weight="1"
+                android:theme="@style/Button" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="#00000000"
+                android:visibility="visible" />
 
 
         </LinearLayout>
