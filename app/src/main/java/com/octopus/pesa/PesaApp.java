@@ -1,8 +1,9 @@
 package com.octopus.pesa;
 
 import android.app.Activity;
-import android.app.Application;
 import android.content.Context;
+import android.support.multidex.MultiDex;
+import android.support.multidex.MultiDexApplication;
 import android.util.Log;
 
 import com.octopus.pesa.models.Account;
@@ -16,7 +17,7 @@ import java.io.File;
 /**
  * Created by octopus on 7/18/16.
  */
-public class PesaApp extends Application implements Transaction.TransactionCompleteListener{
+public class PesaApp extends MultiDexApplication implements Transaction.TransactionCompleteListener{
     private Context pesaContext;
     private Activity currentActivity;
     private PesaService pesaService;
@@ -30,7 +31,11 @@ public class PesaApp extends Application implements Transaction.TransactionCompl
     public void clearAppData() {
 
     }
-
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(newBase);
+        MultiDex.install(this);
+    }
 
     @Override
     public void onCreate() {

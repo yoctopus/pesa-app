@@ -11,13 +11,13 @@ import com.octopus.pesa.models.notifications.Notification;
  * Created by octopus on 6/23/16.
  */
 public abstract class Transaction {
-    public static final int LOGIN = TempData.AccInfoTransactionID;
     public static final int RECORDS = TempData.RecordsTransactionID;
     public static final int INCOME = TempData.IncomeTransactionID;
     public static final int EXPENSE = TempData.ExpenseTransactionID;
     public static final int ITEMS = TempData.ItemTransactionID;
     public static final int INFO = TempData.AccInfoTransactionID;
     public static final int INIT = TempData.InitTransactionID;
+    public static final int SAVEINFO = TempData.SaveInfoTransactionID;
     public TransactionCompleteListener txCompleteListener = null;
     private Context context;
     private Context activityContext;

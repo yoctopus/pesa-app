@@ -27,11 +27,11 @@ public class AccountInfoTransaction extends Transaction {
     public void endTransaction(boolean success) {
         logTransaction("Loading info complete");
         if (success) {
-            TempData.info = getInfo();
+            TempData.account.setInfo(getInfo());
             logTransaction("Loading info for " + info.getName());
             Toast.makeText(getActivityContext(), "info loading success", Toast.LENGTH_SHORT).show();
         } else {
-            TempData.info = null;
+            TempData.account.setInfo(null);
             logTransaction("Account info not loaded");
             Toast.makeText(getActivityContext(), "info loading failed", Toast.LENGTH_SHORT).show();
         }

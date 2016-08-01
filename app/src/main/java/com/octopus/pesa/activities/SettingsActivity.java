@@ -4,6 +4,7 @@ package com.octopus.pesa.activities;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
@@ -21,7 +22,10 @@ import android.support.v7.app.ActionBar;
 import android.text.TextUtils;
 import android.view.MenuItem;
 
+import com.octopus.pesa.PesaApp;
 import com.octopus.pesa.R;
+import com.octopus.pesa.models.AccountInfo;
+import com.octopus.pesa.models.Transaction;
 
 import java.util.List;
 
@@ -36,11 +40,12 @@ import java.util.List;
  * href="http://developer.android.com/guide/topics/ui/settings.html">Settings
  * API Guide</a> for more information on developing a Settings UI.
  */
-public class SettingsActivity extends AppCompatPreferenceActivity {
+public class SettingsActivity extends AppCompatPreferenceActivity implements Transaction.TransactionCompleteListener {
     /**
      * A preference value change listener that updates the preference's summary
      * to reflect its new value.
      */
+    private static PesaApp app;
     private static Preference.OnPreferenceChangeListener
             sBindPreferenceSummaryToValueListener = new Preference.OnPreferenceChangeListener() {
         @Override
@@ -60,6 +65,9 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
                                 : null);
 
             } else if (preference instanceof EditTextPreference) {
+                EditTextPreference editTextPreference = (EditTextPreference) preference;
+                String valu = editTextPreference.getText();
+                preference.setSummary(valu);
 
             } else if (preference instanceof RingtonePreference) {
                 // For ringtone preferences, look up the correct display value
@@ -91,6 +99,20 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
             return true;
         }
     };
+
+    @Override
+    public void onBackPressed() {
+        SharedPreferences preference = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+
+        String name = preference.getString("account_name", null);
+        int pin = Integer.parseInt(preference.getString("account_pin", "0")) ;
+        int limit = Integer.parseInt(preference.getString("account_daily_limit", "0"));
+        AccountInfo info = new AccountInfo(name, pin, limit,
+                app.getAccount().getInfo().getDailySpent(), app.getAccount().getInfo().getTotalBal());
+        app.getAccount().setActivityContext(this);
+        app.getAccount().upDateInfo(info);
+        app.getAccount().setOnTransactionCompleteListener(this);
+    }
 
     /**
      * Helper method to determine if the device has an extra-large screen. For
@@ -127,6 +149,7 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setupActionBar();
+        app = (PesaApp) getApplication();
     }
 
     /**
@@ -166,6 +189,18 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
                 || AccountPreferenceFragment.class.getName().equals(fragmentName)
                 || AccountBackupPreferenceFragment.class.getName().equals(fragmentName)
                 || NotificationPreferenceFragment.class.getName().equals(fragmentName);
+    }
+
+    @Override
+    public void onTransactionComplete(int id, boolean success) {
+        switch (id) {
+            case Transaction.SAVEINFO : {
+                if (success) {
+                    super.onBackPressed();
+                }
+                break;
+            }
+        }
     }
 
     /**

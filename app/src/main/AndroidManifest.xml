@@ -10,6 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+
             android:name=".activities.SplashActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="Pesa"  >

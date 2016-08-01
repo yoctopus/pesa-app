@@ -66,15 +66,21 @@ public class RecordAdapter extends ArrayAdapter {
         getItem().setText(r.getNameItem());
         getAmount().setText(""+r.getAmount());
         getDate().setText(r.getDateString());
-        if(r.getType() == Item.EXPENSE_TYPE) {
+        if(assertEquals(r.getType(), Record.Expense)) {
             type.setText("Expense");
+            getImageView().setImageResource(R.drawable.ic_expense_shown);
         }
-        else if (r.getType() == Item.INCOME_TYPE) {
+        else if (assertEquals(r.getType(), Record.Income)) {
            type.setText("Income");
+            getImageView().setImageResource(R.drawable.ic_income_shown);
         }
 
 
         return v;
+    }
+
+    public boolean assertEquals(String a, String b) {
+        return a.equalsIgnoreCase(b);
     }
 
     public ArrayList<Record> getRecords() {

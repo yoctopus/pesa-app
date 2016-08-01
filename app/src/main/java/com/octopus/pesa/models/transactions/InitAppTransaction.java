@@ -44,7 +44,9 @@ public class InitAppTransaction extends Transaction {
         items = getDb().getItems();
         account.setRecords(records);
         account.setItems(items);
+        logTransaction("loading info");
         account.setInfo(getDb().getAccountInfo());
+        logTransaction("info loaded\n"+account.getInfo().getName()+ account.getInfo().getPin());
         return true;
     }
 

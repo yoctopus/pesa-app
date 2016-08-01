@@ -8,6 +8,7 @@ import com.octopus.pesa.models.transactions.ExpenseTransaction;
 import com.octopus.pesa.models.transactions.IncomeTransaction;
 import com.octopus.pesa.models.transactions.InitAppTransaction;
 import com.octopus.pesa.models.transactions.RecordsTransaction;
+import com.octopus.pesa.models.transactions.SaveInfoTransaction;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -36,14 +37,12 @@ public class Account {
         this.items = new ArrayList<>();
         this.setInfo(null);
         setTx(null);
-        items.add(new Item(Item.INCOME_TYPE, "Salary"));
-        items.add(new Item(Item.INCOME_TYPE, "Loan"));
-        items.add(new Item(Item.INCOME_TYPE, "MPesa"));
-        items.add(new Item(Item.EXPENSE_TYPE, "Airtime"));
-        items.add(new Item(Item.EXPENSE_TYPE, "Food"));
-        items.add(new Item(Item.EXPENSE_TYPE, "Shopping"));
     }
 
+    public void upDateInfo(AccountInfo info) {
+        tx = new SaveInfoTransaction(getContext(), getActivityContext(), info);
+        tx.executeNow();
+    }
     public void refresh() {
         requestRecords();
     }
@@ -71,11 +70,22 @@ public class Account {
     }
 
     public ArrayList<String> getIncomeItems() {
-        return getItems_of_Type(Item.INCOME_TYPE);
+        ArrayList<String> item = new ArrayList<>();
+        item.add("Salary");
+        item.add("Loan");
+        item.add("Lottery");
+        item.addAll(getItems_of_Type(Item.INCOME_TYPE));
+        return item;
     }
 
     public ArrayList<String> getExpenseItems() {
-        return getItems_of_Type(Item.EXPENSE_TYPE);
+        ArrayList<String> item = new ArrayList<>();
+        item.add("Meals");
+        item.add("Transport");
+        item.add("Rent");
+        item.add("Clothing");
+        item.addAll(getItems_of_Type(Item.EXPENSE_TYPE));
+        return item;
     }
 
     public ArrayList<String> getItems_of_Type(String type) {

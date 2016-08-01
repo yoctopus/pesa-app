@@ -334,11 +334,11 @@ public class TransactionActivity extends AppCompatActivity implements
                 break;
             }
             case Transaction.RECORDS: {
-                getApp().getAccount().setRecords(TempData.records);
+                getApp().getAccount().setRecords(TempData.account.getRecords());
                 break;
             }
             case Transaction.INFO: {
-                getApp().getAccount().setInfo(TempData.info);
+                getApp().getAccount().setInfo(TempData.account.getInfo());
                 break;
             }
 
@@ -349,8 +349,7 @@ public class TransactionActivity extends AppCompatActivity implements
         return getApp().getAccount();
     }
 
-    public void setAccount(Account account)
-    {
+    public void setAccount(Account account) {
         getApp().setAccount(account);
 
     }

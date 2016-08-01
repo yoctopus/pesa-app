@@ -14,8 +14,8 @@ public class TempData {
     public static final int IncomeTransactionID = 2;
     public static final int ExpenseTransactionID = 3;
     public static final int ItemTransactionID = 4;
-
     public static final int InitTransactionID = 6;
+    public static final int SaveInfoTransactionID = 7;
 
     //temporary data
     public static Account account = null;

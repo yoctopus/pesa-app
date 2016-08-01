@@ -129,13 +129,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             case R.id.btn8:
             case R.id.btn9: {
                 String number = btn.getText().toString();
-                String entered = getPinText().getText().toString().trim();
-                if (entered.length() < 4) {
+                if (getPinText().getText().toString().trim().length() < 4) {
                     getPinText().append(number);
-                    if (entered.length() == 3) {
-                        attemptLogin(entered);
+                    if (getPinText().getText().toString().trim().length() == 4) {
+                        attemptLogin(getPinText().getText().toString().trim());
                     }
                 }
+
                 break;
             }
 

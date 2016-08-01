@@ -157,14 +157,14 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void printBalance() {
-        int totalspent = app.getAccount().getExpenseTotal();
+        int totalspent = app.getAccount().getInfo().getDailySpent();
         int accset = app.getAccount().getInfo().getDailyLimit();
         if (accset != 0) {
             int percent = totalspent / accset * 100;
-            balanceText.setText(percent+" %");
+            balanceText.setText(percent+" % used ");
         }
         else {
-            balanceText.setText(totalspent+" %");
+            balanceText.setText(totalspent+" % used");
         }
     }
 
