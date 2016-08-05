@@ -42,12 +42,19 @@ public class InitAppTransaction extends Transaction {
         records = getDb().getRecords();
         logTransaction("loading items");
         items = getDb().getItems();
-        account.setRecords(records);
+        account.setRecords(organizeRecords(records));
         account.setItems(items);
         logTransaction("loading info");
         account.setInfo(getDb().getAccountInfo());
         logTransaction("info loaded\n"+account.getInfo().getName()+ account.getInfo().getPin());
         return true;
+    }
+    private ArrayList<Record> organizeRecords(ArrayList<Record> records) {
+        ArrayList<Record> records1 = new ArrayList<>();
+        for(int i = records.size() - 1; i >= 0 ; i--) {
+            records1.add(records.get(i));
+        }
+        return records1;
     }
 
     /**

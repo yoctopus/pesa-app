@@ -6,6 +6,7 @@ import android.widget.Toast;
 import com.octopus.pesa.models.AccountInfo;
 import com.octopus.pesa.models.Record;
 import com.octopus.pesa.models.Transaction;
+import com.octopus.pesa.models.notifications.Notification;
 
 /**
  * Created by octopus on 6/23/16.
@@ -13,10 +14,12 @@ import com.octopus.pesa.models.Transaction;
 public class ExpenseTransaction extends Transaction {
 
     private Record record;
+    private Notification notification;
 
     public ExpenseTransaction(Context context, Context activity, Record r) {
         super(context, activity, Transaction.EXPENSE);
         this.record = r;
+        notification = new Notification(activity);
     }
 
     /**
@@ -27,7 +30,8 @@ public class ExpenseTransaction extends Transaction {
     @Override
     public void endTransaction(boolean success) {
         logTransaction("Adding expense end");
-        Toast.makeText(getActivityContext(), "Expense transacted", Toast.LENGTH_SHORT).show();
+        notification.setToastBundle("Expense", "Expense transacted");
+        notification.notify(Notification.TOAST);
     }
 
     /**

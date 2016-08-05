@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3f51b5</color>
-    <color name="colorPrimaryDark">#303f9f</color>
-    <color name="colorAccent">#ffffff</color>
+    <color name="colorPrimary">#4fc3f7</color>
+    <color name="colorPrimaryDark">#03a9f4</color>
+    <color name="colorAccent">#f5f5f5</color>
     <color name="color_income_toolbar">#1b5e20</color>
     <color name="color_expense_toolbar">#ef6c00</color>
-    <color name="green_color">#0baf08</color>
-    <color name="green_primary_color">#388e3c</color>
-    <color name="orange_color">#f29427</color>
-    <color name="orange_primary_color">#f9a825</color>
-
+    <color name="green_color">#4caf50</color>
+    <color name="green_primary_color">#2e7d32</color>
+    <color name="orange_color">#ff9800</color>
+    <color name="orange_primary_color">#ef6c00</color>
+    <color name="button_blue_background">#2196f3</color>
+    <color name="button_orange_background">#f57c00</color>
+    <color name="button_green_background">#388e3c</color>
     <color name="black_overlay">#66000000</color>
 </resources>

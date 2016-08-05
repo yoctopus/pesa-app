@@ -6,16 +6,19 @@ import android.widget.Toast;
 import com.octopus.pesa.models.AccountInfo;
 import com.octopus.pesa.models.Record;
 import com.octopus.pesa.models.Transaction;
+import com.octopus.pesa.models.notifications.Notification;
 
 /**
  * Created by octopus on 6/23/16.
  */
 public class IncomeTransaction extends Transaction {
     private Record record;
+    private Notification notification;
 
     public IncomeTransaction(Context context, Context activity, Record r) {
         super(context, activity, Transaction.INCOME);
         this.record = r;
+        notification = new Notification(activity);
     }
 
     /**
@@ -26,7 +29,8 @@ public class IncomeTransaction extends Transaction {
     @Override
     public void endTransaction(boolean success) {
         logTransaction("Adding income end");
-        Toast.makeText(getActivityContext(), "Income Transacted", Toast.LENGTH_SHORT).show();
+        notification.setToastBundle("Income", "Income transacted");
+        notification.notify(Notification.TOAST);
     }
 
     /**

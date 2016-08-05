@@ -81,19 +81,39 @@ public class TransactionActivity extends AppCompatActivity implements
         setApp((PesaApp) getApplication());
         setNotification(new Notification(this));
     }
+    @Override
+    public void onAttachFragment(Fragment fragment) {
+        super.onAttachFragment(fragment);
+        if (fragment instanceof IncomeFragment) {
+
+        }
+        else if (fragment instanceof ExpenseFragment) {
+
+        }
+        else if (fragment instanceof BalanceFragment) {
+
+        }
+    }
+
 
     @Override
     public void onFragmentInteraction(int position) {
         switch (position) {
             case TempData.incomeChoice: {
+                appBarLayout.setBackgroundColor(getResources().getColor(R.color.green_color));
+                toolbar.setBackgroundColor(getResources().getColor(R.color.green_color));
                 setUpIncomeFragment();
                 break;
             }
             case TempData.expenseChoice: {
+                appBarLayout.setBackgroundColor(getResources().getColor(R.color.orange_color));
+                toolbar.setBackgroundColor(getResources().getColor(R.color.orange_color));
                 setUpExpenseFragment();
                 break;
             }
             case TempData.balanceChoice: {
+                appBarLayout.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+                toolbar.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
                 setUpBalanceFragment();
                 break;
             }
@@ -268,6 +288,7 @@ public class TransactionActivity extends AppCompatActivity implements
 
     private boolean TransactIncome(String item, String amount) {
         int cash = Integer.parseInt(amount);
+        getAccount().setActivityContext(this);
         getAccount().transactIncome(item, cash);
         getAccount().setOnTransactionCompleteListener(this);
         return true;
@@ -275,6 +296,7 @@ public class TransactionActivity extends AppCompatActivity implements
 
     private boolean TransactExpense(String item, String amount) {
         int cash = Integer.parseInt(amount);
+        getAccount().setActivityContext(this);
         getAccount().transactExpense(item, cash);
         getAccount().setOnTransactionCompleteListener(this);
         return true;
@@ -532,7 +554,7 @@ public class TransactionActivity extends AppCompatActivity implements
             Fragment fragment = null;
             switch (position) {
                 case TempData.incomeChoice: {
-                    fragment = IncomeFragment.newInstance(null, null);
+                    fragment = IncomeFragment.newInstance();
                     break;
                 }
                 case TempData.expenseChoice: {
@@ -540,7 +562,7 @@ public class TransactionActivity extends AppCompatActivity implements
                     break;
                 }
                 case TempData.balanceChoice: {
-                    fragment = BalanceFragment.newInstance(null, null);
+                    fragment = BalanceFragment.newInstance();
                     break;
                 }
             }

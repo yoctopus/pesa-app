@@ -13,13 +13,15 @@
     <LinearLayout
         android:id="@+id/topSection"
         android:layout_width="match_parent"
-        android:layout_height="fill_parent"
+        android:layout_height="match_parent"
         android:layout_marginBottom="5dp"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
-        android:layout_weight="7"
+        android:layout_weight="3"
         android:orientation="vertical"
-        android:paddingTop="10dp">
+        android:paddingTop="10dp"
+        android:theme="@style/AppTheme.PopupOverlay"
+        android:background="@color/button_blue_background">
 
         <TextView
             android:id="@+id/show_daily_usage_percentage"
@@ -46,83 +48,64 @@
             android:layout_weight="3"
             android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/two_day_before_yesterday_textview"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:textAlignment="center"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:textColor="#ffffff"
-                android:textSize="20sp" />
-
-            <TextView
-                android:id="@+id/day_before_yesterday_textview"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:textAlignment="center"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:textColor="#ffffff"
-                android:textSize="20sp" />
-
-            <TextView
-                android:id="@+id/yesterday_bal_textview"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:textAlignment="center"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:textColor="#ffffff"
-                android:textSize="20sp" />
         </LinearLayout>
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/bottomSection"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="fill_parent"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
-        android:layout_weight="3"
-        android:backgroundTintMode="src_atop"
-        android:orientation="vertical"
-        android:dividerPadding="5dp"
-        android:elevation="5dp">
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:elevation="4dp">
 
         <LinearLayout
+            android:id="@+id/bottomSection"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_height="fill_parent"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_weight="3"
+            android:backgroundTintMode="src_atop"
+            android:orientation="vertical"
+            android:dividerPadding="5dp"
+            android:elevation="5dp">
 
-            <ImageButton
-                android:id="@+id/imageButton"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:background="#00000000"
-                android:src="@mipmap/ic_launcher_history" />
+                android:orientation="horizontal"
+                android:gravity="center_horizontal">
 
-            <TextView
-                android:id="@+id/textView3"
-                android:layout_width="wrap_content"
+                <ImageButton
+                    android:id="@+id/imageButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:background="#00000000"
+                    android:src="@mipmap/ic_launcher_history" />
+
+                <TextView
+                    android:id="@+id/textView3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:paddingLeft="10dp"
+                    android:text="Recent Transactions"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textColor="#ffffff"
+                    android:textSize="25sp"
+                    android:layout_marginLeft="10dp" />
+            </LinearLayout>
+
+            <ListView
+                android:theme="@style/AppTheme.PopupOverlay"
+                android:id="@+id/listView_recent"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:paddingLeft="10dp"
-                android:text="Recent Transactions"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:textColor="#ffffff"
-                android:textSize="25sp"
-                android:layout_marginLeft="10dp" />
+                android:divider="@color/colorAccent"
+                android:dividerHeight="1dp"
+                android:listSelector="@drawable/list_selector"
+                android:background="@color/button_blue_background" />
         </LinearLayout>
-
-        <ListView
-            android:id="@+id/listView_recent"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:divider="@color/colorAccent"
-            android:dividerHeight="1dp"
-            android:listSelector="@drawable/list_selector" />
-    </LinearLayout>
+    </FrameLayout>
 
 </LinearLayout>

@@ -31,7 +31,8 @@
                 android:textAlignment="center"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:textColor="#ffffff"
-                android:textSize="80sp" />
+                android:textSize="80sp"
+                android:theme="@style/AppTheme.PopupOverlay" />
         </LinearLayout>
 
         <LinearLayout
@@ -87,12 +88,12 @@
 
             <Button
                 android:id="@+id/expensebtn7"
-                style="?android:attr/buttonStyleSmall"
+                style="@style/Button"
                 android:layout_width="fill_parent"
                 android:layout_height="match_parent"
-                android:layout_margin="2dp"
+                android:layout_margin="15dp"
                 android:layout_weight="1"
-                android:background="#00000000"
+                android:background="@drawable/button_orange_background"
                 android:padding="2dp"
                 android:text="7"
                 android:textColor="#ffffff"
@@ -100,12 +101,12 @@
 
             <Button
                 android:id="@+id/expensebtn8"
-                style="?android:attr/buttonStyleSmall"
+                style="@style/Button"
                 android:layout_width="fill_parent"
                 android:layout_height="match_parent"
-                android:layout_margin="2dp"
+                android:layout_margin="15dp"
                 android:layout_weight="1"
-                android:background="#00000000"
+                android:background="@drawable/button_orange_background"
                 android:padding="2dp"
                 android:text="8"
                 android:textColor="#ffffff"
@@ -113,12 +114,12 @@
 
             <Button
                 android:id="@+id/expensebtn9"
-                style="?android:attr/buttonStyleSmall"
+                style="@style/Button"
                 android:layout_width="fill_parent"
                 android:layout_height="match_parent"
-                android:layout_margin="2dp"
+                android:layout_margin="15dp"
                 android:layout_weight="1"
-                android:background="#00000000"
+                android:background="@drawable/button_orange_background"
                 android:padding="2dp"
                 android:text="9"
                 android:textColor="#ffffff"
@@ -133,12 +134,12 @@
 
             <Button
                 android:id="@+id/expensebtn4"
-                style="?android:attr/buttonStyleSmall"
+                style="@style/Button"
                 android:layout_width="fill_parent"
                 android:layout_height="match_parent"
-                android:layout_margin="2dp"
+                android:layout_margin="15dp"
                 android:layout_weight="1"
-                android:background="#00000000"
+                android:background="@drawable/button_orange_background"
                 android:padding="2dp"
                 android:text="4"
                 android:textColor="#ffffff"
@@ -146,12 +147,12 @@
 
             <Button
                 android:id="@+id/expensebtn5"
-                style="?android:attr/buttonStyleSmall"
+                style="@style/Button"
                 android:layout_width="fill_parent"
                 android:layout_height="match_parent"
-                android:layout_margin="2dp"
+                android:layout_margin="15dp"
                 android:layout_weight="1"
-                android:background="#00000000"
+                android:background="@drawable/button_orange_background"
                 android:padding="2dp"
                 android:text="5"
                 android:textColor="#ffffff"
@@ -159,12 +160,12 @@
 
             <Button
                 android:id="@+id/expensebtn6"
-                style="?android:attr/buttonStyleSmall"
+                style="@style/Button"
                 android:layout_width="fill_parent"
                 android:layout_height="match_parent"
-                android:layout_margin="2dp"
+                android:layout_margin="15dp"
                 android:layout_weight="1"
-                android:background="#00000000"
+                android:background="@drawable/button_orange_background"
                 android:padding="2dp"
                 android:text="6"
                 android:textColor="#ffffff"
@@ -179,12 +180,12 @@
 
             <Button
                 android:id="@+id/expensebtn1"
-                style="?android:attr/buttonStyleSmall"
+                style="@style/Button"
                 android:layout_width="fill_parent"
                 android:layout_height="match_parent"
-                android:layout_margin="2dp"
+                android:layout_margin="15dp"
                 android:layout_weight="1"
-                android:background="#00000000"
+                android:background="@drawable/button_orange_background"
                 android:padding="2dp"
                 android:text="1"
                 android:textColor="#ffffff"
@@ -192,12 +193,12 @@
 
             <Button
                 android:id="@+id/expensebtn2"
-                style="?android:attr/buttonStyleSmall"
+                style="@style/Button"
                 android:layout_width="fill_parent"
                 android:layout_height="match_parent"
-                android:layout_margin="2dp"
+                android:layout_margin="15dp"
                 android:layout_weight="1"
-                android:background="#00000000"
+                android:background="@drawable/button_orange_background"
                 android:padding="2dp"
                 android:text="2"
                 android:textColor="#ffffff"
@@ -205,12 +206,12 @@
 
             <Button
                 android:id="@+id/expensebtn3"
-                style="?android:attr/buttonStyleSmall"
+                style="@style/Button"
                 android:layout_width="fill_parent"
                 android:layout_height="match_parent"
-                android:layout_margin="2dp"
+                android:layout_margin="15dp"
                 android:layout_weight="1"
-                android:background="#00000000"
+                android:background="@drawable/button_orange_background"
                 android:padding="2dp"
                 android:text="3"
                 android:textColor="#ffffff"
@@ -225,12 +226,12 @@
 
             <Button
                 android:id="@+id/expensebtn0"
-                style="?android:attr/buttonStyleSmall"
+                style="@style/Button"
                 android:layout_width="fill_parent"
                 android:layout_height="match_parent"
-                android:layout_margin="2dp"
+                android:layout_margin="15dp"
                 android:layout_weight="1"
-                android:background="#00000000"
+                android:background="@drawable/button_orange_background"
                 android:clickable="true"
                 android:padding="2dp"
                 android:text="0"
@@ -242,19 +243,23 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="#00000000"
+                android:background="@drawable/button_orange_background"
                 android:scaleType="fitCenter"
-                android:src="@drawable/ic_back" />
+                android:src="@drawable/ic_back"
+                style="@style/Button"
+                android:layout_margin="15dp" />
 
             <ImageButton
                 android:id="@+id/expenseokButton"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="#00000000"
+                android:background="@drawable/button_orange_background"
                 android:contentDescription="back button"
                 android:scaleType="fitCenter"
-                android:src="@drawable/ic_ok" />
+                android:src="@drawable/ic_ok"
+                style="@style/Button"
+                android:layout_margin="15dp" />
 
 
         </LinearLayout>

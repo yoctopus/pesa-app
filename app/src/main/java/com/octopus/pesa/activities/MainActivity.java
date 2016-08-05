@@ -1,8 +1,10 @@
 package com.octopus.pesa.activities;
 
 
+import android.annotation.TargetApi;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -17,6 +19,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.octopus.pesa.PesaApp;
@@ -81,9 +84,8 @@ public class MainActivity extends AppCompatActivity
 
 
     private void prepareData() {
-        app.getAccount().setActivityContext(this);
-        app.getAccount().requestRecords();
-        app.getAccount().setOnTransactionCompleteListener(this);
+        printBalance();
+        printRecords();
     }
 
     @Override
@@ -156,20 +158,22 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
+
     private void printBalance() {
         int totalspent = app.getAccount().getInfo().getDailySpent();
         int accset = app.getAccount().getInfo().getDailyLimit();
         if (accset != 0) {
             int percent = totalspent / accset * 100;
             balanceText.setText(percent+" % used ");
+
         }
         else {
             balanceText.setText(totalspent+" % used");
+
         }
     }
 
     private void printRecords() {
-
         if (!app.getAccount().getRecords().isEmpty()) {
             RecordAdapter adapter = new RecordAdapter(this, R.layout.record_row, app.getAccount().getRecords());
             recordView.setAdapter(adapter);
